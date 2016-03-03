@@ -8,3 +8,5 @@ Project dependencies:
 - PyCrypto (pip install pycrypto)
 - sqlite
 - javascript/node js
+- 
+- For unit testing: py.test or standart unittest
