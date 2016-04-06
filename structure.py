@@ -6,13 +6,18 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from contextlib import closing
 
 # configuration
-DATABASE = 'structure.db'
+DATABASE = 'C:\\Users\\Mark\\Desktop\\team_project\\e-voting\\tmp\\structure.db'
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+
+
+@app.before_request
+def before_request():
+    g.db = connect_db()
 
 @app.route('/')
 def show_entries():
@@ -31,20 +36,17 @@ def add_entry():
     return redirect(url_for('show_entries'))
 
 def connect_db():
-    return sqlite3.connect('structure1.db')
+    return sqlite3.connect(app.config['DATABASE'])
 
 def init_db():
     with closing(connect_db()) as db:
-        with app.open_resource('C:\\Users\\Mark\\Desktop\\team project\\e-voting\\schema.sql', mode='r') as f:
+        with app.open_resource('schema.sql', mode='r') as f:
             db.cursor().executescript(f.read())
         db.commit()
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
     
-@app.before_request
-def before_request():
-    g.db = connect_db()
 
 @app.teardown_request
 def teardown_request(exception):
