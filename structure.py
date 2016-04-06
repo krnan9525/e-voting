@@ -6,7 +6,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from contextlib import closing
 
 # configuration
-DATABASE = 'C:\\Users\\Mark\\Desktop\\team_project\\e-voting\\tmp\\structure.db'
+DATABASE = 'C:\\Users\\Mark\\Desktop\\team_project\\e-voting\\tmp\\election.db'
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
@@ -66,7 +66,7 @@ def connect_db():
 
 def init_db():
     with closing(connect_db()) as db:
-        with app.open_resource('schema.sql', mode='r') as f:
+        with app.open_resource('election.sql', mode='r') as f:
             db.cursor().executescript(f.read())
         db.commit()
 
