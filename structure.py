@@ -27,9 +27,11 @@ def teardown_request(exception):
 
 @app.route('/')
 def show_entries():
-    cur = g.db.execute('select title, text from entries order by id desc')
+    cur = g.db.execute('select name, surname from candidate order by id desc')
     entries = [dict(title=row[0], text=row[1]) for row in cur.fetchall()]
-    return render_template('show_entries.html', entries=entries)
+    curr = g.db.execute('select party_name,party_id from party order by party_id desc')
+    parties = [dict(party_name=row[0], party_id=row[1]) for row in curr.fetchall()]
+    return render_template('root.html', entries=entries, parties=parties)
 
 @app.route('/add', methods=['POST'])
 def add_entry():
@@ -72,6 +74,3 @@ def init_db():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
-    
-
-        
