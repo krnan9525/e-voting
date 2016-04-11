@@ -59,12 +59,12 @@ def pprint(data):
 def root():
 	return render_template('index.html')
 
-@app.route ('/decrypt', methods=['POST' , 'GET'])
+@app.route ('/decrypt', methods=['POST'])
 def decrypt():
     abc = ""
     abc = request.form['data1']
     abc = (decrypt_data(abc))
-    return render_template('index.html',ttext=abc)
+    return render_template('index.html')
 
 if __name__ == '__main__':
 	  app.run()
