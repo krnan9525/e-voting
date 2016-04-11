@@ -1,11 +1,18 @@
-from flask import Flask, request, redirect, url_for, send_from_directory, jsonify
-
-import Crypto
+from __future__ import print_function
+from flask import Flask, request, redirect, url_for, send_from_directory, jsonify,render_template,session
+import sys
+import crypto
+sys.modules['Crypto'] = crypto
 from Crypto.Cipher import *
 from Crypto.PublicKey import RSA
 
 import json
 from base64 import b64decode
+
+import logging
+from logging.handlers import RotatingFileHandler
+
+#logger.setLevel('DEBUG')
 
 # Setup Flask app.
 app = Flask(__name__, static_url_path='/static')
@@ -32,9 +39,8 @@ def decrypt_data (data):
 	"""
 
 	# private key is store in this same folder at private-key.pem
-	f = open ('private-key.pem', 'r');
-	key = RSA.importKey(f.read());
-
+	f = open ('private-key.pem', 'r')
+	key = RSA.importKey(f.read())
 	# Generate a new cipher with the private key
 	cipher = PKCS1_OAEP.new (key);
 	
@@ -42,18 +48,23 @@ def decrypt_data (data):
 	ciphertext = b64decode(text)
 	decrypted_text = cipher.decrypt(ciphertext)
 
-	return json.loads(decrypted_text);
+	return json.loads(decrypted_text)
+
+def pprint(data):
+    with open('log.txt', 'w') as ff:
+        print(data, file=ff)
+    return 
 
 @app.route ('/')
 def root():
-	return app.send_static_file ('index.html');
+	return render_template('index.html')
 
-@app.route ('/decrypt', methods=['POST'])
+@app.route ('/decrypt', methods=['POST' , 'GET'])
 def decrypt():
-	data = request.args.get ('data');
-	print data;
-	print decrypt_data(data)
-	return 'OK', 202
+    abc = ""
+    abc = request.form['data1']
+    abc = (decrypt_data(abc))
+    return render_template('index.html',ttext=abc)
 
 if __name__ == '__main__':
 	  app.run()
