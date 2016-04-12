@@ -54,9 +54,9 @@ def ping():
   
 @app.route ('/decrypt', methods=['POST'])
 def decrypt():
-	data = request.args.get ('data');
-	print data
-	print decrypt_data(data)
+	votes = request.form['votes'];
+	print votes
+	print decrypt_data(votes)
 	return 'OK', 200
 
 if __name__ == '__main__':

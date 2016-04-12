@@ -21,12 +21,14 @@ function encrypt_text (){
   return encrypt ('testing');
 }
 
-function send_data_to_server (data){
-  console.log (data);
-  $.post ('http://guilhermeleobas.me:5000/decrypt', {'data': data} );
-  //$.get ('http://www.localhost:5000/ping', function (response){
-    //console.log (response);
-  //})
+function send_data_to_server (d){
+  console.log (d);
+  $.ajax ({
+    method: 'POST',
+    url: 'http://guilhermeleobas.me:5000/decrypt',
+    data: {'votes': d}  
+  })
+  //$.post ('http://guilhermeleobas.me:5000/decrypt', {data: 2} );
 }
 
 /* Data should contain voting order
