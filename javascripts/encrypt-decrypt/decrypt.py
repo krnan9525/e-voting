@@ -51,8 +51,8 @@ def root():
 @app.route ('/decrypt', methods=['POST'])
 def decrypt():
 	data = request.args.get ('data');
-	print data;
-	print decrypt_data(data)
+	#print data
+	#print decrypt_data(data)
 	return 'OK', 202
 
 if __name__ == '__main__':

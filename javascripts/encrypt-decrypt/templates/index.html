@@ -1,0 +1,15 @@
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src='forge.min.js'></script>
+  <script src="encrypt.js"></script>
+</head>
+
+<body>
+  <form  action="{{ url_for('decrypt') }}" method="POST" class=encryped>
+    <dt>text:
+    <dd><textarea name=data1 rows=2 cols=40></textarea>
+    <dd><input type=submit value=test>
+  </form>
+</body>
+</html>

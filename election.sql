@@ -1,5 +1,5 @@
 --####
---#maight be really dangerous is using drop table
+--#maight be really dangerous if using drop table
 --####
 --#drop table if exists candidate;
 create table candidate (
