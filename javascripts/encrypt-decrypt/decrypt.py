@@ -48,12 +48,16 @@ def decrypt_data (data):
 def root():
 	return app.send_static_file ('index.html');
 
+@app.route ('/ping', methods=['GET'])
+def ping():
+  return 'pong'
+  
 @app.route ('/decrypt', methods=['POST'])
 def decrypt():
 	data = request.args.get ('data');
-	#print data
-	#print decrypt_data(data)
-	return 'OK', 202
+	print data
+	print decrypt_data(data)
+	return 'OK', 200
 
 if __name__ == '__main__':
-	  app.run()
+	  app.run(host='0.0.0.0')

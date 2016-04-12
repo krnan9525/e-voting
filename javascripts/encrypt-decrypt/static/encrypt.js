@@ -16,17 +16,17 @@ let publicKey = forge.pki.publicKeyFromPem (publicKeyPemFormat);
 
 function encrypt_text (){
   // let data = document.getElementById('text_normal').value;
-  data = {'gary': 1, 'bryan': 2, 'marc': 3, 'damian':4};
-  return encrypt (data);
+  //data = {'gary': 1, 'bryan': 2, 'marc': 3, 'damian':4};
+  data = 'testing'
+  return encrypt ('testing');
 }
 
 function send_data_to_server (data){
   console.log (data);
-
-  // Chrome and other browsers do not let me to POST to localhost
-  // During test, use a chrome extension called postman
-  // https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop
-  $.post ('http://localhost:5000/decrypt', {'data': data} );
+  $.post ('http://guilhermeleobas.me:5000/decrypt', {'data': data} );
+  //$.get ('http://www.localhost:5000/ping', function (response){
+    //console.log (response);
+  //})
 }
 
 /* Data should contain voting order
@@ -49,8 +49,6 @@ function encrypt (data){
 
   // Transform ciphertext to base64 encoding format
   let b64Text = forge.util.encode64(ciphertext);
-
-  console.log (b64Text);
 
   return send_data_to_server(b64Text);
 }
