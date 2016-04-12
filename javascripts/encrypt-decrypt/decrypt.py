@@ -50,17 +50,10 @@ def root():
 
 @app.route ('/decrypt', methods=['POST'])
 def decrypt():
-<<<<<<< HEAD
-    abc = ""
-    abc = request.form['data1']
-    abc = (decrypt_data(abc))
-    return render_template('index.html')
-=======
 	data = request.args.get ('data');
-	print data;
-	print decrypt_data(data)
+	#print data
+	#print decrypt_data(data)
 	return 'OK', 202
->>>>>>> refs/remotes/origin/master
 
 if __name__ == '__main__':
 	  app.run()
