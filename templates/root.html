@@ -1,8 +1,11 @@
 <!doctype html>
+<head>
 <meta charset='utf-8'>
 <link rel="shortcut icon" href="favicon.ico">
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='example.css') }}">
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='dragula.css') }}">
+</head>
+<body ng-controller="AppCtrl">
 <title>Iirsh Election System</title>
 <div class='examples'>
   <div class='parent'>
@@ -21,10 +24,45 @@
         </div>
         {% endfor %}
       </div>
-      <div id='right-defaults' class='container'>
-      </div>
+      <div id='right-defaults' class='container'></div>
     </div>
 </div>
-  
+</div>
+<script type="text/javascript">
+    function elementChildren (element) 
+    {
+    var childNodes = element.childNodes,
+        children = [],
+        i = childNodes.length;
+
+    while (i--) {
+        if (childNodes[i].nodeType == 1) {
+            children.unshift(childNodes[i]);
+        }
+    }
+
+    return children;
+    }
+    function getOrder()
+    {
+        var c = document.getElementById("right-defaults");
+        var node = c.childNodes;
+        //var node = elementChildren(nodes);
+        var text = "";
+        var i;
+        for (i = 0; i < node.length; i++)
+        {
+            text = text + node[i].id + ":" + (i+1) + ";" ;
+        }
+        encrypt(text);
+        //document.getElementById("demo").innerHTML = text;
+    }
+</script>
+</body>
+
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="{{ url_for('static', filename='dragula.js') }}"></script>
+<script src="{{ url_for('static', filename='encrypt.js') }}"></script>
+<script src="{{ url_for('static', filename='forge.min.js') }}"></script>
 <script src="{{ url_for('static', filename='example.min.js') }}"></script>
+<script data-require="angular.js@1.1.5" data-semver="1.1.5" src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
