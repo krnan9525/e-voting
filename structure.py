@@ -1,5 +1,4 @@
 # all the imports
-from flask import Flask, render_template
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
@@ -50,6 +49,21 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out')
     return redirect(url_for('show_entries'))
+    
+def do_vote():
+    return true
+
+def do_spoile():
+    return ture
+    
+#@app.contact
+def contact():
+    if request.method == 'POST':
+        if request.form['submit'] == 'Do Vote':
+            do_vote()
+        elif request.form['submit'] == 'Do Spoile':
+            do_spoile()
+    return 'thanks for your vote'
 
 def connect_db():
     return sqlite3.connect(app.config['DATABASE'])
